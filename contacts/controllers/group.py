@@ -8,6 +8,7 @@ from addressbook.contacts.forms.group import GroupForm
 from addressbook.contacts.controllers.home import construct_page
 
 """
+List all groups for the loggedin user with option to add new group
 """
 @login_required
 @csrf_exempt
@@ -28,6 +29,11 @@ def group(request):
     else:
         group_form = GroupForm(instance=Group())
     
+    """
+    SQL Query: SELECT *
+               FROM group
+               WHERE owner_id=user.pk
+    """
     groups = Group.objects.filter(owner=user)
     values = {'groups':groups, 'group_form':group_form, 'message':message}
     

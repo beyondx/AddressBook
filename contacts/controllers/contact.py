@@ -14,8 +14,15 @@ List all the contacts for current user
 def list(request):
     user = request.user
     
+    """
+    SQL Query: SELECT *
+               FROM contact c
+               INNER JOIN group g
+               ON c.group_id=g.id
+               WHERE owner_id=user.pk
+    """
     contacts = Contact.objects.filter(owner=user)
-    
+
     values = {'contacts':contacts}
     
     return HttpResponse(construct_page(request, render_to_string('contact/list.html', values)))
@@ -29,6 +36,13 @@ def show(request):
     user = request.user
     
     if 'contact' in request.GET:
+        """
+        SQL Query: SELECT *
+                   FROM contact c
+                   INNER JOIN group g
+                   ON c.group_id=g.id
+                   WHERE owner_id=user.pk AND c.id=contact
+        """
         contact = Contact.objects.get(pk=request.GET.get('contact'),owner=user)
     else:
         return HttpResponseRedirect('/contacts/')
@@ -71,6 +85,13 @@ def edit(request):
     contact = Contact(owner=user)
     
     if 'contact' in request.GET:
+        """
+        SQL Query: SELECT *
+                   FROM contact c
+                   INNER JOIN group g
+                   ON c.group_id=g.id
+                   WHERE owner_id=user.pk AND c.id=contact
+        """
         contact = Contact.objects.get(pk=request.GET.get('contact'),owner=user)
         
     if request.method == "POST":
@@ -92,6 +113,11 @@ Delete any contact from the list
 def delete(request):
     user = request.user
     if 'contact' in request.GET:
+        """
+        SQL Query: DELETE
+                   FROM contact
+                   WHERE owner_id=user.pk AND id=contact
+        """
         Contact.objects.filter(pk=request.GET.get('contact'),owner=user).delete()
         
     return HttpResponseRedirect("/contacts/")

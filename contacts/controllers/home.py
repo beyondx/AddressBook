@@ -12,21 +12,24 @@ Create homepage with Sign In and Sign Up options
 @csrf_exempt
 def home(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect('/dashboard')
-        
+        return HttpResponseRedirect('/dashboard') 
     values = {}
     if request.method == 'POST':
+        """ Check if signin button pressed """
         if 'signin' in request.POST:
             result = signin(request)
-            
-            if not result['error']:
-                return HttpResponseRedirect('/dashboard')
-            else:
+
+            """ On error return error message"""
+            if result['error']:
                 values['error_message'] = result['message']
+            else:
+                return HttpResponseRedirect('/dashboard')
                 
+        """ Check if sign up button pressed """   
         if 'signup' in request.POST:
             result = signup(request)
-        
+            
+            """ On error return error message"""
             if result['error']:
                 values['error_message'] = result['message']     
             else:
@@ -55,19 +58,31 @@ def signin(request):
 Method to signup new users if they provide valid email and password
 """
 def signup(request):
+    
+    """ Check if username and password are not blank """
+    if request.POST.get('username').strip() == "" or request.POST.get('password').strip() == "":
+        return {'error':True, 'message':"Username and password cannot be blank."}
+        
+    """ Check if username is valid email """
+    if not is_valid_email(request.POST.get('username').strip()):
+        return {'error':True, 'message':"Invalid email."}
+        
+    """ Check if username is available """
     if not is_unique_user(request.POST.get('username')):
         return {'error':True, 'message':"Username already exist."}
       
-    if request.POST.get('username').strip() == "" or request.POST.get('password').strip() == "":
-        return {'error':True, 'message':"Username and password cannot be blank."}
-      
+    """ Check if first_name and last_name are not blank """
     if request.POST.get('first_name').strip() == "" or request.POST.get('last_name').strip() == "":
         return {'error':True, 'message':"First and last name cannot be blank."}
-    if not is_valid_email(request.POST.get('username').strip()):
-        return {'error':True, 'message':"Invalid email."}
+    
+    """ Check if both password entires match """
     if request.POST.get('password') != request.POST.get('cpassword'):
         return {'error':True, 'message':"Passwords did not match."}
         
+    """
+    SQL Query: INSERT INTO user('first_name','last_name','username','email','is_active','password')
+               VALUES (first_name, last_name, username, username, 1,MD5(password))
+    """
     user = User(first_name=request.POST.get("first_name"),
                 last_name=request.POST.get("last_name"),
                 username=request.POST.get("username"),
@@ -85,9 +100,6 @@ Method to signout user
 def signout(request):
     if request.user.is_authenticated():
         logout(request)
-    
-    if 'user' in request.session:
-        del request.session['user']
 
     return HttpResponseRedirect('/')
     
@@ -96,6 +108,11 @@ Helper method to check whether the email is unique for signup
 """
 def is_unique_user(username):
     try:
+        """
+        SQL Query: SELECT *
+                   FROM user
+                   WHERE username=username
+        """
         user = User.objects.get(username=username)
         return False
     except User.DoesNotExist:

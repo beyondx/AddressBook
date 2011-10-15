@@ -4,6 +4,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from addressbook.contacts.controllers.home import construct_page
 
+"""
+User can change its first name,last name and password
+"""
 @login_required
 @csrf_exempt
 def account(request):
