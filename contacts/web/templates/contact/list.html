@@ -1,0 +1,23 @@
+<div class="contact-list main-area">
+    <h3> My contacts</h3>
+    <span class="message">{{message}}</span>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Group</th>
+        </tr>
+        {% for contact in contacts %}
+        <tr>
+            <td>{% if contact.image %}<img class="contact-image-list" src="{{contact.image.url}}">{% endif %}</td>
+            <td><a href="/contacts/show/?contact={{contact.pk}}">{{contact.first_name}} {{contact.last_name}} </a></td>
+            <td>{{contact.mobile_phone}}</td>
+            <td>{{contact.group.name}}</td>
+            <td>[<a href="/contacts/edit/?contact={{contact.pk}}">Edit</a>]
+                [<a href="/contacts/delete/?contact={{contact.pk}}" onclick="return confirm('Are you sure you want to delete this contact?');">Delete</a>]
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/contacts/create/">Create New Contact</a>
+</div>

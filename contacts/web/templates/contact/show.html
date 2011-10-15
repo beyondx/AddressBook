@@ -1,0 +1,39 @@
+<div class="show-contact main-area">
+    {% if contact.image %}<img class="contact-image" src="{{contact.image.url}}">{% endif %}
+    <h4>{{contact.first_name}} {{contact.last_name}} [<a href="/contacts/edit/?contact={{contact.pk}}">Edit</a>]</h4>
+    
+    <table>
+        <tr>
+            <td>Email: </td>
+            <td>{% if contact.email != "" %}{{contact.email}}{% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Home Phone: </td>
+            <td>{% if contact.home_phone != "" %}{{contact.home_phone}}{% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Mobile: </td>
+            <td>{% if contact.mobile_phone != "" %}{{contact.mobile_phone}}{% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Office Phone: </td>
+            <td>{% if contact.office_phone != "" %}{{contact.office_phone}} {% if contact.office_phone_extn != "" %} x{{contact.office_phone_extn}}{% endif %}{% else %} None {% endif %} </td>
+        </tr>
+        <tr>
+            <td>Facebook: </td>
+            <td>{% if contact.facebook != "" %}{{contact.facebook}}{% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Twitter: </td>
+            <td>{% if contact.twitter != "" %}{{contact.twitter}}{% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Group: </td>
+            <td>{% if contact.group.name != "" %}{{contact.group.name}}{% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td/>
+            <td><a href="/contacts/edit/?contact={{contact.pk}}">Edit Details</a></td>
+        </tr>
+    </table>
+</div>

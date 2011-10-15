@@ -1,0 +1,52 @@
+<div class="error-message">{% if error_message %}{{error_message}}{% endif %}</div>
+<div id="signin" class="float-left">
+    <h4> Sign In</h4>
+    <form action="" method="POST">
+        <table>
+            <tr>
+                <td>Email: </td>
+                <td><input type="text" name="username" id="username"/></td>
+            </tr>
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" id="password"/></td>
+            </tr>
+            <tr>
+                <td/>
+                <td><input type="submit" name="signin" value="Signin"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div id="signup" class="float-left">
+    <h4>Or... Sign Up</h4>
+    <form action="" method="POST">
+        <table>
+            <tr>
+                <td>Email: </td>
+                <td><input type="text" name="username" id="username"/></td>
+            </tr>
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" id="password"/></td>
+            </tr>
+            <tr>
+                <td>Confirm: </td>
+                <td><input type="password" name="cpassword" id="cpassword"/></td>
+            </tr>
+            <tr>
+                <td>First Name: </td>
+                <td><input type="text" name="first_name" id="first_name"/></td>
+            </tr>
+            <tr>
+                <td>Last Name: </td>
+                <td><input type="text" name="last_name" id="last_name"/></td>
+            </tr>
+            <tr>
+                <td/>
+                <td><input type="reset"/> <input type="submit" name="signup" value="Signup"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div class="clear-both"></div>

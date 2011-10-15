@@ -1,0 +1,37 @@
+<div class="setting main-area">
+    <span class="message">{{message}}</span>
+    <h4> Name change</h4>
+    <form action="" method="POST">
+        <table>
+            <tr>
+                <td> First Name:</td>
+                <td> <input type="text" name="first_name" id="first_name" value="{{user.first_name}}"/></td>
+            </tr>
+            <tr>
+                <td> Last Name:</td>
+                <td> <input type="text" name="last_name" id="last_name" value="{{user.last_name}}"/></td>
+            </tr>
+            <tr>
+                <td/>
+                <td> <input type="submit" value="Update" /></td>
+            </tr>
+        </table>
+    </form>
+    <h4> Password change</h4>
+    <form action="" method="POST">
+        <table>
+            <tr>
+                <td> New Password:</td>
+                <td> <input type="password" name="password" id="password"/></td>
+            </tr>
+            <tr>
+                <td> Confirm Password:</td>
+                <td> <input type="password" name="cpassword" id="cpassword"/></td>
+            </tr>
+            <tr>
+                <td/>
+                <td> <input type="submit" value="Change Password" /></td>
+            </tr>
+        </table>
+    </form>
+</div>

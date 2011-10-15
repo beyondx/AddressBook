@@ -1,0 +1,63 @@
+.float-left{
+    float:left;
+}
+
+.float-right{
+    float:right;
+}
+
+.clear-both{
+    clear:both;
+}
+
+#signup{
+    padding:10px 40px;
+    border-left:1px solid #ccc;
+    margin-left:30px;
+}
+
+#signin{
+    padding: 10px 5px;
+}
+
+.sidebar{
+    padding:5px 40px 5px 15px;
+    margin-right:30px;
+    border-right:2px solid #ccc;
+    height:150px;
+}
+
+.main-area{
+    float:left;
+}
+
+.sidebar li,.sidebar ul{
+    list-style:none;
+    padding:0px;
+    margin:0px;
+}
+
+table td{
+    padding:3px 4px;
+}
+
+.contact-image{
+    width:120px;
+    margin-left:20px;
+}
+.contact-image-list{
+    width:60px;
+}
+
+a{
+    text-decoration:none;
+    color:#cc0000;
+}
+
+.error-message{
+    color:#cc0000;
+}
+
+table {
+    margin-bottom:20px;
+}

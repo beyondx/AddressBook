@@ -1,0 +1,21 @@
+<div class="group-list main-area">
+    <span class="message">{{message}}</span>
+    <form action="" method="POST">
+        <table>
+            <tr>
+                <th>Group Name</th>
+                <th/>
+            </tr>
+            {% for group in groups %}
+            <tr>
+                <td>{{group.name}}</td>
+                <td><a href="/groups/delete/?group={{group.pk}}" onclick="return confirm('Are you sure you want to delete the group?');">Delete</a></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>{{group_form.name}}</td>
+                <td><input type="submit" value="Create Group"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
