@@ -6,6 +6,9 @@ from addressbook.contacts.controllers.home import construct_page
 from addressbook.contacts.models.contact import Contact
 from addressbook.contacts.forms.contact import ContactForm
 
+"""
+List all the contacts for current user
+"""
 @login_required
 @csrf_exempt
 def list(request):
@@ -17,6 +20,9 @@ def list(request):
     
     return HttpResponse(construct_page(request, render_to_string('contact/list.html', values)))
 
+"""
+Display details of given contact
+"""
 @login_required
 @csrf_exempt
 def show(request):
@@ -31,6 +37,9 @@ def show(request):
     
     return HttpResponse(construct_page(request, render_to_string('contact/show.html', values)))
     
+"""
+Create new contacts
+"""
 @login_required
 @csrf_exempt
 def create(request):
@@ -50,6 +59,9 @@ def create(request):
     
     return HttpResponse(construct_page(request, render_to_string('contact/edit.html', values)))
 
+"""
+Edit details of an existing contact
+"""
 @login_required
 @csrf_exempt
 def edit(request):
@@ -73,6 +85,9 @@ def edit(request):
     
     return HttpResponse(construct_page(request, render_to_string('contact/edit.html', values)))
 
+"""
+Delete any contact from the list
+"""
 @login_required
 def delete(request):
     user = request.user

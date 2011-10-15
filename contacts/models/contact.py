@@ -3,6 +3,9 @@ from django.db.models import *
 from addressbook.contacts.models.group import Group
 import datetime
 
+"""
+Model to store contacts
+"""
 class Contact(Model):
     first_name = CharField(max_length=50, null=False)
     last_name = CharField(max_length=50, null=False)

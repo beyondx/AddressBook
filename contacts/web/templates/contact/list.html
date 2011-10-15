@@ -3,6 +3,7 @@
     <span class="message">{{message}}</span>
     <table>
         <tr>
+            <th/>
             <th>Name</th>
             <th>Mobile</th>
             <th>Group</th>
@@ -10,7 +11,7 @@
         {% for contact in contacts %}
         <tr>
             <td>{% if contact.image %}<img class="contact-image-list" src="{{contact.image.url}}">{% endif %}</td>
-            <td><a href="/contacts/show/?contact={{contact.pk}}">{{contact.first_name}} {{contact.last_name}} </a></td>
+            <td><a href="/contacts/show/?contact={{contact.pk}}">{{contact.last_name.title}}, {{contact.first_name.title}} </a></td>
             <td>{{contact.mobile_phone}}</td>
             <td>{{contact.group.name}}</td>
             <td>[<a href="/contacts/edit/?contact={{contact.pk}}">Edit</a>]

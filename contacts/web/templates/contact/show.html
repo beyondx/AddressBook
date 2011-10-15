@@ -1,6 +1,6 @@
 <div class="show-contact main-area">
     {% if contact.image %}<img class="contact-image" src="{{contact.image.url}}">{% endif %}
-    <h4>{{contact.first_name}} {{contact.last_name}} [<a href="/contacts/edit/?contact={{contact.pk}}">Edit</a>]</h4>
+    <h4>{{contact.first_name.title}} {{contact.last_name.title}} [<a href="/contacts/edit/?contact={{contact.pk}}">Edit</a>]</h4>
     
     <table>
         <tr>

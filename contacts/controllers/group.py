@@ -3,9 +3,12 @@ from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from addressbook.contacts.models.group import Group
+from addressbook.contacts.models.contact import Contact
 from addressbook.contacts.forms.group import GroupForm
 from addressbook.contacts.controllers.home import construct_page
 
+"""
+"""
 @login_required
 @csrf_exempt
 def group(request):
@@ -29,11 +32,19 @@ def group(request):
     values = {'groups':groups, 'group_form':group_form, 'message':message}
     
     return HttpResponse(construct_page(request, render_to_string('group.html', values)))
-    
+ 
+"""
+Delete a group from list
+"""
 @login_required
 def delete(request):
     user = request.user
     if 'group' in request.GET:
-        Group.objects.filter(pk=request.GET.get('group'),owner=user).delete()
+        group = Group.objects.filter(pk=request.GET.get('group'),owner=user)
+        for contact in Contact.objects.filter(group=group,owner=user):
+            contact.group = None
+            contact.save()
+            
+        group.delete()
         
     return HttpResponseRedirect("/groups/")

@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django import forms
 
+"""
+Create homepage with Sign In and Sign Up options
+"""
 @csrf_exempt
 def home(request):
     if request.user.is_authenticated():
@@ -31,12 +34,15 @@ def home(request):
             
     return HttpResponse(construct_page(request,render_to_string('home.html',values)))
 
+"""
+Method to authenticate user for signining into the system
+"""
 def signin(request):
     user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
     if user is not None:
         if user.is_active:
             login(request, user)
-            request.session['user'] = user
+            
             return {'error':False, 'message':'Success!!!'}
         else:
             return {'error':True, 'message':"Your account has been disabled!"}
@@ -45,6 +51,9 @@ def signin(request):
             return {'error':True, 'message':"Username doesn't exist."}
         return {'error':True, 'message':"Your username and password were incorrect."}
 
+"""
+Method to signup new users if they provide valid email and password
+"""
 def signup(request):
     if not is_unique_user(request.POST.get('username')):
         return {'error':True, 'message':"Username already exist."}
@@ -70,7 +79,9 @@ def signup(request):
     
     return {'error':False,'message':'Success!!!!'}
     
-
+"""
+Method to signout user
+"""
 def signout(request):
     if request.user.is_authenticated():
         logout(request)
@@ -80,13 +91,19 @@ def signout(request):
 
     return HttpResponseRedirect('/')
     
+"""
+Helper method to check whether the email is unique for signup
+"""
 def is_unique_user(username):
     try:
         user = User.objects.get(username=username)
         return False
     except User.DoesNotExist:
         return True
-    
+   
+"""
+Helper method to vaidate email
+"""
 def is_valid_email(email):
     try:
         f = forms.EmailField()
@@ -94,12 +111,18 @@ def is_valid_email(email):
         return True
     except ValidationError:
         return False
-    
+ 
+"""
+Helper method to construct page with header and footer
+"""
 def construct_page(request,html=''):
     if request.user.is_authenticated():
         html = render_to_string('sidebar.html',{}) + html
-    return get_page_header(request) + html
+    return get_page_header(request) + html + render_to_string('footer.html',{})
 
+"""
+Helper method to return header part of webpage
+"""
 def get_page_header(request):
     values = {'loggedin':False}
     if request.user.is_authenticated():
