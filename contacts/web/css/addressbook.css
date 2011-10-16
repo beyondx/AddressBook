@@ -33,13 +33,13 @@ h1, h2{
 }
 
 #signup{
-    padding:10px 40px;
+    padding:10px 30px 10px 40px;
     border-left:1px solid #ccc;
-    margin-left:30px;
+    margin-left:10px;
 }
 
 #signin{
-    padding: 10px 5px;
+    padding: 10px 60px;
 }
 
 .sidebar{

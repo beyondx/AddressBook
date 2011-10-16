@@ -1,5 +1,5 @@
 <div class="contact-list main-area">
-    <h3> My contacts</h3>
+    <h3> My Contacts</h3>
     <span class="message">{{message}}</span>
     <table>
         <tr>
@@ -10,7 +10,7 @@
         </tr>
         {% for contact in contacts %}
         <tr>
-            <td>{% if contact.image %}<img class="contact-image-list" src="{{contact.image.url}}">{% endif %}</td>
+            <td><a href="/contacts/show/?contact={{contact.pk}}"><img class="contact-image-list" src="{% if contact.image %}{{contact.image.url}}{% else %}https://www.msu.edu/~fsclub/images/default_profile.jpg{% endif %}"></a></td>
             <td><a href="/contacts/show/?contact={{contact.pk}}">{{contact.last_name.title}}, {{contact.first_name.title}} </a></td>
             <td>{{contact.mobile_phone}}</td>
             <td>{{contact.group.name}}</td>

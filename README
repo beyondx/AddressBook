@@ -1,0 +1,31 @@
+-------------------
+Author: Manuj Singh
+-------------------
+
+About Address Book
+------------------
+Address Book is an online application to store all your contacts.
+Currently, only email, phone numbers and social networking IDs
+can be stored but in future it can even store home and office
+addresses.
+
+Requirements
+------------
+1. Python
+2. Django
+3. MySQL
+4. Web Server(e.g. Apache)
+
+Installation
+------------
+To install make sure you have python, django and mysql installed
+on your system, then follow the following steps:
+
+1. Clone the git repository (git@github.com:manujsingh/AddressBook.git).
+2. Change database settings in settings.py.
+3. Create required tables by calling "python manage.py sycdb" from the
+root folder. Create contacts_contact and contacts_group table for
+contacts app.
+4. Start django server with "python manage.py runserver" from the
+project root.
+5. Enjoy the app
